@@ -1,0 +1,296 @@
+<div class="container" id="formContainer">
+    {% if error is defined %}
+        <div class="row">
+            <div class="alert alert-danger">
+                {{ error|safe }}
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="alert alert-info">
+            <ul>
+                <li>September 13, 2017: Recent issues should now be fixed.</li>
+                <li><a href="https://hard-g.com/support.html" class="alert-link">Let me know</a> if you have any problems!</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <form id="dynastyScoreForm" class="form-horizontal" method="POST">
+            {% if not yahooLeagues %}
+            <div class="form-group">
+                <label for="leagueHostRadioGroup" class="col-sm-3 control-label">League Host</label>
+                <div class="btn-group col-sm-9" data-toggle="buttons" id="leagueHostRadioGroup">
+                    <label class="btn btn-default active">
+                        <input name="leagueHost" value="fleaflicker" type="radio" checked="">Fleaflicker
+                    </label>
+                    <label class="btn btn-default">
+                        <input name="leagueHost" value="myfantasyleague" type="radio">My Fantasy League
+                    </label>
+                    <label class="btn btn-default">
+                        <input name="leagueHost" value="yahoo" type="radio">Yahoo
+                    </label>
+                </div>
+            </div>
+            {% else %}
+            <input type="hidden" name="leagueHost" value="yahoo" />
+            <input type="hidden" name="yahooKey" value="{{ yahooKey }}" />
+            {% endif %}
+            {% if not yahooLeagues %}
+            <div class="form-group">
+                <label for="leagueId" class="col-sm-3 control-label">League ID</label>
+                <div class="col-sm-9">
+                    <input type="text" pattern="\d*" class="form-control" id="leagueId" name="leagueId" placeholder="ID">
+                </div>
+            </div>
+            {% else %}
+            <div class="form-group">
+                <label for="leagueId" class="col-sm-3 control-label">Yahoo League</label>
+                <div class="col-sm-9">
+                    {% set index = 1 %}
+                    {% for id, name in yahooLeagues.iteritems() %}
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="leagueId" id="leagueId{{ index }}" value="{{ id }}">
+                            {{ name }}
+                        </label>
+                    </div>
+                    {% set index = index + 1 %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="rankingsTypeRadioGroup" class="col-sm-3 control-label">Rankings Type</label>
+                <div class="btn-group col-sm-9" data-toggle="buttons" id="rankingsTypeRadioGroup">
+                    <label class="btn btn-default active">
+                        <input name="rankingsType" value="weekly" type="radio" checked="">Weekly
+                    </label>
+                    <label class="btn btn-default">
+                        <input name="rankingsType" value="restofseason" type="radio">Rest of Season
+                    </label>
+                    <label class="btn btn-default">
+                        <input name="rankingsType" value="season" type="radio">Season
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pprRadioGroup" class="col-sm-3 control-label">PPR</label>
+                <div class="btn-group col-sm-9" data-toggle="buttons" id="pprRadioGroup">
+                    <label class="btn btn-default active">
+                        <input name="ppr" value="standard" type="radio" checked="">Standard
+                    </label>
+                    <label class="btn btn-default">
+                        <input name="ppr" value="ppr" type="radio">PPR
+                    </label>
+                    <label class="btn btn-default">
+                        <input name="ppr" value="half" type="radio">Half
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="qbs" class="col-sm-3 control-label">Quarterbacks</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="qbs" name="qbs">
+                        <option>0</option>
+                        <option selected="selected">1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="rbs" class="col-sm-3 control-label">Running Backs</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="rbs" name="rbs">
+                        <option>0</option>
+                        <option>1</option>
+                        <option selected="selected">2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="wrs" class="col-sm-3 control-label">Wide Receivers</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="wrs" name="wrs">
+                        <option>0</option>
+                        <option>1</option>
+                        <option selected="selected">2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tes" class="col-sm-3 control-label">Tight Ends</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="tes" name="tes">
+                        <option>0</option>
+                        <option selected="selected">1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="flexes" class="col-sm-3 control-label">Flexes (RB/WR/TE)</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="flexes" name="flexes">
+                        <option>0</option>
+                        <option selected="selected">1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ks" class="col-sm-3 control-label">Kickers</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="ks" name="ks">
+                        <option>0</option>
+                        <option selected="selected">1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dsts" class="col-sm-3 control-label">Defense/Special Teams</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="dsts" name="dsts">
+                        <option>0</option>
+                        <option selected="selected">1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dls" class="col-sm-3 control-label">Defensive Linemen</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="dls" name="dls">
+                        <option selected="selected">0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lbs" class="col-sm-3 control-label">Linebackers</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="lbs" name="lbs">
+                        <option selected="selected">0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dbs" class="col-sm-3 control-label">Defensive Backs</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="dbs" name="dbs">
+                        <option selected="selected">0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="idps" class="col-sm-3 control-label">IDP Flexes (DL/LB/DB)</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="idps" name="idps">
+                        <option selected="selected">0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="calculateDynastyLeagueRankings" class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                    <button type="submit" class="btn btn-primary" id="calculateDynastyScore">Calculate Dynasty Score</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

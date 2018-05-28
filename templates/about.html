@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Dynasty Score - About{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 about">
+            <h1>Dynasty Score <small>By <a href="https://hard-g.com">Brent Rager</a></small></h1>
+            <p>
+                Dynasty Score is all about providing information on how the teams in your league compare.  
+                For some, it's about knowing where they need to improve. For others, it's about knowing
+                their team is good, but finally having a way to prove it to everybody else in the league.
+            </p>
+            <h2>Rankings <small>By <a href="https://www.fantasypros.com/">FantasyPros.com</a></h2>
+            <p>
+                We compile a set of rankings using your dynasty league teams and the consensus rankings provided
+                by <a href="https://www.fantasypros.com/">FantasyPros.com</a>.
+            </p>
+            <h3>Redraft Starter Rankings</h3>
+            <p>
+                We find the consensus redraft ranking of each player on each team and build the best set of starters
+                based on the league starting configuration.
+            </p>
+            <h3>Dynasty Starter Rankings</h3>
+            <p>
+                We find the consensus dynasty ranking of each player on each team and build the best set of starters
+                based on the league starting configuration.
+            </p>
+            <h3>Combined Starter Rankings</h3>
+            <p>
+                We add up the consensus redraft and dynasty ranking of each player on each team and build the best set of starters
+                based on the league starting configuration.
+            </p>
+            <h3>Redraft Depth Rankings</h3>
+            <p>
+                We find the consensus redraft ranking of each player on each team and build the best set of starters
+                plus one depthspot  at each of the WR, RB, TE, and Flex positions based on the league starting configuration.
+            </p>
+            <h3>Dynasty Depth Rankings</h3>
+            <p>
+                We find the consensus dynasty ranking of each player on each team and build the best set of starters
+                plus one depthspot  at each of the WR, RB, TE, and Flex positions based on the league starting configuration.
+            </p>
+            <h3>Combined Depth Rankings</h3>
+            <p>
+                We add up the consensus redraft and dynasty ranking of each player on each team and build the best set of starters
+                plus one depthspot  at each of the WR, RB, TE, and Flex positions based on the league starting configuration.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

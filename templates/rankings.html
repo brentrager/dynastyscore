@@ -1,0 +1,65 @@
+{% for title, ranking in rankings.iteritems() %}
+{% if title != "League Name" %}
+    <div class="col-md-4 ranking">
+        <table class="table table-condensed">
+            <thead>
+                <th colspan="2">{{ title }}</th>
+                <th><a href="#" class="ranking-zoom"><span class="glyphicon glyphicon-zoom-in dynasty-glyphicon-big" aria-hidden="true"></span></a></th>
+            </thead>
+            <thead>
+                <th>#</th>
+                <th>Team</th>
+                <th>Score</th>
+            </thead>
+            {% set rank = 1 %}
+            {% for team in ranking %}
+            <tr>
+                <td>{{ rank }}</td>
+                <td>{{ team["team"] }}</td>
+                <td>{{ team["score"] }}</td>
+            </tr>
+                {% set rank = rank + 1 %}
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}
+{% endfor %}
+
+{% for title, ranking in rankings.iteritems() %}
+{% if title != "League Name" %}
+    <div class="col-md-12 ranking-roster-hidden" id="ranking-roster-{{ title|replace(" ", "-") }}">
+        <table class="table table-condensed">
+            <thead>
+                <th colspan="4">{{ title }}</th>
+            </thead>
+            {% set rank = 1 %}
+            {% for team in ranking %}
+            <thead>
+                <th>{{ rank }}</th>
+                <th colspan="2">{{ team["team"] }}</th>
+                <th>{{ team["score"] }}</th>
+            </thead>
+            <thead>
+                <th>Position</th>
+                <th>Name</th>
+                <th>Team</th>
+                <th>{% if title == "Age Rankings" %}Age{% else %}Rank{% endif %}</th>
+            </thead>
+                {% for player in team["roster"] %}
+                <tr>
+                    <td>{{ player["position"] }}</td>
+                    <td>{{ player["name"] }}</td>
+                    <td>{{ player["team"] }}</td>
+                    <td>{{ player["rank"] }}</td>
+                </tr>
+                {% endfor %}
+                {% set rank = rank + 1 %}
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}
+{% endfor %}
+
+{% if "League Name" in rankings %}
+    <span id="leagueName" class="hidden">{{ rankings["League Name"] }}</span>
+{% endif %}

@@ -1,0 +1,15 @@
+/bin/
+/include/
+/lib/
+/local/
+/scripts/
+/rankings_images/
+/yql_cache/
+*.sock
+*.pyc
+.Python
+pip-selfcheck.json
+*.log*
+config.json
+*.db
+test.py
